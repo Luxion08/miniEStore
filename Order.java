@@ -1,5 +1,3 @@
-package com.mycompany.miniestore;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
