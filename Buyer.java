@@ -1,5 +1,3 @@
-package com.mycompany.miniestore;
-
 import java.util.ArrayList;
 import java.util.List;
 
