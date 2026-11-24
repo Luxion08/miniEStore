@@ -1,4 +1,3 @@
-package com.mycompany.miniestore;
 public class Product {
     public int id;
     public String nama;
