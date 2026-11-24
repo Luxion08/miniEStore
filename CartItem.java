@@ -1,4 +1,3 @@
-package com.mycompany.miniestore;
 public class CartItem {
     public Product product;
     public int quantity;
