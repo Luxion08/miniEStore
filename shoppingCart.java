@@ -1,5 +1,3 @@
-package com.mycompany.miniestore;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +73,7 @@ public class shoppingCart {
     }
 
     public double getPajak() {
-        return getCartSubtotal() * pajak;
+        return (getCartSubtotal() - getNominalDiskon()) * pajak;
     }
 
     public double total(int ongkir) {
@@ -99,6 +97,11 @@ public class shoppingCart {
     }
 
     public void removeItem(int productId, int quantityToRemove) {
+        if (quantityToRemove <= 0) {
+            System.out.println("Input tidak boleh minus!.");
+            return;
+        }
+
         CartItem targetItem = null;
 
         for (CartItem item : items) {
@@ -119,6 +122,11 @@ public class shoppingCart {
         } else {
             targetItem.addquantity(-quantityToRemove);
             System.out.println("Jumlah " + targetItem.getProduct().nama + " di keranjang dikurangi.");
+        }
+
+        if (activeVoucher != null && getCartSubtotal() < activeVoucher.minBelanja) {
+            System.out.println("Subtotal belanja kurang dari minimum voucher. Voucher \"" + activeVoucher.nama + "\" tidak berlaku lagi.");
+            activeVoucher = null;
         }
     }
 
