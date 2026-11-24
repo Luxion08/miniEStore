@@ -1,5 +1,3 @@
-package com.mycompany.miniestore;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,20 +28,42 @@ public class Provinsi {
 
     public static void displayProvinsi(List<Provinsi> daftar) {
         System.out.println("\n--- DAFTAR PROVINSI & ONGKIR ---");
-        System.out.printf("%-20s | %-12s\n", "Provinsi", "Ongkir");
-        System.out.println("-----------------------------------");
+        System.out.printf("%-3s | %-20s | %-12s\n", "No", "Provinsi", "Ongkir");
+        System.out.println("-----------------------------------------");
+        int no = 1;
         for (Provinsi p : daftar) {
-            System.out.printf("%-20s | Rp %d\n", p.nama, p.ongkir);
+            System.out.printf("%-3d | %-20s | Rp %d\n", no++, p.nama, p.ongkir);
         }
-        System.out.println("-----------------------------------");
+        System.out.println("-----------------------------------------");
     }
 
+
     public static Provinsi findByName(List<Provinsi> daftar, String keyword) {
-        String key = keyword.trim().toLowerCase();
-        for (Provinsi p : daftar) {
-            if (p.nama.toLowerCase().contains(key)) {
-                return p;
+        if (keyword == null) {
+            return null;
+        }
+
+        String key = keyword.trim();
+        if (key.isEmpty()) {
+            return null;
+        }
+
+
+        if (key.matches("\\d+")) {
+            try {
+                int nomor = Integer.parseInt(key);
+                if (nomor >= 1 && nomor <= daftar.size()) {
+                    return daftar.get(nomor - 1);
+                }
+            } catch (NumberFormatException e) {
+   
             }
+            return null;
+        }
+
+    
+        for (Provinsi p : daftar) {
+            if (p.nama.equalsIgnoreCase(key)) return p;
         }
         return null;
     }
